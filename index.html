@@ -3,116 +3,206 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CBAr-Ge | Mekanik Tasarım</title>
+<title>CB Ar-Ge</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
-body {
-    margin:0;
-    font-family: Arial, sans-serif;
-    background:#0f172a;
-    color:white;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
-header {
-    padding:20px 50px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:#111827;
+
+body{
+background:#0f0f0f;
+color:white;
+overflow-x:hidden;
 }
-header h1 {
-    margin:0;
-    font-size:20px;
+
+/* NAVBAR */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+position:fixed;
+width:100%;
+background:rgba(15,15,15,0.85);
+backdrop-filter:blur(10px);
+z-index:1000;
 }
-nav a {
-    color:white;
-    text-decoration:none;
-    margin-left:20px;
+
+.logo{
+font-size:22px;
+font-weight:700;
+letter-spacing:2px;
 }
-.hero {
-    text-align:center;
-    padding:100px 20px;
+
+.logo span.cb{
+color:white;
 }
-.hero h2 {
-    font-size:40px;
-    margin-bottom:20px;
+
+.logo span.arge{
+background:linear-gradient(90deg,#b87333,#ffb77d);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
-.hero p {
-    font-size:18px;
-    color:#cbd5e1;
+
+nav ul{
+display:flex;
+gap:30px;
+list-style:none;
 }
-.button {
-    display:inline-block;
-    margin-top:30px;
-    padding:12px 25px;
-    background:#2563eb;
-    color:white;
-    text-decoration:none;
-    border-radius:5px;
+
+nav ul li a{
+color:#aaa;
+text-decoration:none;
+transition:0.3s;
 }
-.services {
-    padding:80px 50px;
-    background:#111827;
+
+nav ul li a:hover{
+color:#ffb77d;
 }
-.services h3 {
-    text-align:center;
-    margin-bottom:40px;
+
+/* HERO */
+
+.hero{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:0 20px;
 }
-.service-box {
-    display:flex;
-    justify-content:space-around;
-    flex-wrap:wrap;
+
+.hero h1{
+font-size:48px;
+background:linear-gradient(90deg,#ffffff,#cccccc);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:20px;
 }
-.card {
-    background:#1f2937;
-    padding:20px;
-    margin:10px;
-    width:250px;
-    border-radius:8px;
+
+.hero p{
+color:#aaa;
+max-width:600px;
 }
-footer {
-    text-align:center;
-    padding:20px;
-    background:#0f172a;
-    color:#94a3b8;
+
+/* CARDS */
+
+.cards{
+display:flex;
+justify-content:center;
+gap:40px;
+padding:100px 8%;
+flex-wrap:wrap;
+}
+
+.card{
+background:linear-gradient(145deg,#1a1a1a,#121212);
+padding:40px;
+width:300px;
+border-radius:20px;
+position:relative;
+transition:0.4s ease;
+border:1px solid transparent;
+}
+
+.card:hover{
+transform:translateY(-10px);
+border:1px solid rgba(255,183,125,0.6);
+box-shadow:0 0 25px rgba(184,115,51,0.4);
+}
+
+.card h3{
+margin-bottom:15px;
+background:linear-gradient(90deg,#b87333,#ffb77d);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.card p{
+color:#aaa;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:40px;
+color:#555;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+nav{
+padding:15px 5%;
+}
+
+.logo{
+font-size:18px;
+}
+
+.hero h1{
+font-size:32px;
+}
+
+.cards{
+padding:60px 5%;
+gap:25px;
+}
+
+.card{
+width:100%;
+}
+
 }
 </style>
 </head>
+
 <body>
 
-<header>
-<h1>CBAr-Ge</h1>
 <nav>
-<a href="#">Ana Sayfa</a>
-<a href="#">Hizmetler</a>
-<a href="#">İletişim</a>
+<div class="logo">
+<span class="cb">CB</span> <span class="arge">Ar-Ge</span>
+</div>
+<ul>
+<li><a href="#">Anasayfa</a></li>
+<li><a href="#">Projeler</a></li>
+<li><a href="#">Hakkımızda</a></li>
+<li><a href="#">İletişim</a></li>
+</ul>
 </nav>
-</header>
 
 <section class="hero">
-<h2>Mekanik Tasarım & 3D Modelleme</h2>
-<p>Üretime hazır teknik resimler, DXF lazer kesim dosyaları ve montaj çizimleri hazırlıyoruz.</p>
-<a href="mailto:mailadresiniz@gmail.com" class="button">Teklif Al</a>
+<h1>Yenilikçi Mühendislik Çözümleri</h1>
+<p>Endüstriyel tasarım, mekanik sistemler ve ileri mühendislik projeleri için modern çözümler geliştiriyoruz.</p>
 </section>
 
-<section class="services">
-<h3>Hizmetlerimiz</h3>
-<div class="service-box">
+<section class="cards">
 <div class="card">
-<h4>3D CAD Modelleme</h4>
-<p>Autodesk Inventor ile parça ve montaj tasarımı.</p>
+<h3>Prototip Tasarım</h3>
+<p>3D modelleme ve teknik çizim çözümleri.</p>
 </div>
+
 <div class="card">
-<h4>Teknik Resim</h4>
-<p>PDF, DWG formatında üretime hazır çizimler.</p>
+<h3>Ar-Ge Çalışmaları</h3>
+<p>Yenilikçi ve sürdürülebilir mühendislik geliştirme süreçleri.</p>
 </div>
+
 <div class="card">
-<h4>DXF & Lazer Kesim</h4>
-<p>Saç açınım ve kesim dosyaları.</p>
-</div>
+<h3>Üretim Danışmanlığı</h3>
+<p>Endüstriyel üretim süreç optimizasyonu.</p>
 </div>
 </section>
 
 <footer>
-© 2026 CBAr-Ge | Tüm Hakları Saklıdır
+© 2026 CB Ar-Ge | Tüm Hakları Saklıdır
 </footer>
 
 </body>

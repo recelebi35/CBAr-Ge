@@ -12,26 +12,39 @@ font-family:Arial, sans-serif;
 background:#0f0f0f;
 color:white;
 overflow-x:hidden;
+position:relative;
 }
 
-/* BAKIR 3D IŞIN EFEKT */
+/* BAKIR 3D IŞIN EFEKTİ */
 body::before{
 content:"";
 position:fixed;
+top:-50%;
+left:-50%;
 width:200%;
 height:200%;
-background:radial-gradient(circle at center, rgba(184,115,51,0.4) 0%, transparent 60%),
-repeating-linear-gradient(45deg, rgba(184,115,51,0.15) 0px, rgba(184,115,51,0.15) 2px, transparent 2px, transparent 40px);
-animation:rotate 25s linear infinite;
-z-index:-1;
+background:
+radial-gradient(circle at 30% 30%, rgba(184,115,51,0.3), transparent 60%),
+radial-gradient(circle at 70% 70%, rgba(255,140,0,0.2), transparent 60%);
+animation:rotateBakir 20s linear infinite;
+z-index:0;
+pointer-events:none;
 }
 
-@keyframes rotate{
+@keyframes rotateBakir{
 from{transform:rotate(0deg);}
 to{transform:rotate(360deg);}
 }
 
-/* BUTON */
+/* ANA İÇERİK */
+.main{
+position:relative;
+z-index:1;
+text-align:center;
+padding-top:80px;
+}
+
+/* BAKIR BUTON */
 .bakir-btn{
 background:linear-gradient(45deg,#b87333,#ffae42);
 color:white;
@@ -42,24 +55,26 @@ font-weight:bold;
 border-radius:8px;
 box-shadow:0 0 20px rgba(184,115,51,0.7);
 transition:0.3s;
+margin:10px;
 }
 
 .bakir-btn:hover{
-box-shadow:0 0 40px rgba(255,174,66,1);
+box-shadow:0 0 50px rgba(255,174,66,1);
+transform:translateY(-3px);
 }
 
-/* PAKET KUTULARI */
+/* PAKET KARTLARI */
 .paket{
 background:rgba(184,115,51,0.15);
 padding:20px;
-margin:20px;
+margin:20px 0;
 border-radius:10px;
-box-shadow:0 0 15px rgba(184,115,51,0.5);
-transition:0.3s;
+box-shadow:0 0 20px rgba(184,115,51,0.5);
+transition:0.4s;
 }
 
 .paket:hover{
-box-shadow:0 0 40px rgba(255,174,66,1);
+box-shadow:0 0 70px rgba(255,174,66,1);
 transform:scale(1.05);
 }
 
@@ -71,7 +86,7 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.8);
+background:rgba(0,0,0,0.85);
 justify-content:center;
 align-items:center;
 z-index:999;
@@ -104,32 +119,34 @@ color:white;
 }
 
 .success{
-color:#00ff66;
-margin-top:10px;
-font-weight:bold;
 display:none;
+color:#00ff66;
+font-weight:bold;
+margin-top:10px;
 }
-
 </style>
 </head>
+
 <body>
 
-<h1 style="text-align:center;margin-top:50px;">CB Ar-Ge</h1>
+<div class="main">
+<h1>CB Ar-Ge</h1>
 
-<div style="text-align:center;">
 <button class="bakir-btn" onclick="openPopup('paketler')">Paketleri İncele</button>
 <button class="bakir-btn" onclick="openPopup('iletisim')">İletişim</button>
 <button class="bakir-btn" onclick="openPopup('teklif')">Teklif Al</button>
 </div>
 
 <!-- PAKETLER -->
-<div id="paketler" class="popup" onclick="outsideClose(event,'paketler')">
+<div id="paketler" class="popup" onclick="closeOutside(event,'paketler')">
 <div class="popup-content">
 <span class="close" onclick="closePopup('paketler')">✖</span>
 <h2>Paketler</h2>
-<div class="paket">3D Modelleme</div>
+
+<div class="paket">3D Model Tasarımı</div>
 <div class="paket">3D Maket Üretimi</div>
 <div class="paket">Ar-Ge Projelendirme</div>
+
 </div>
 </div>
 
@@ -138,13 +155,14 @@ display:none;
 <div class="popup-content">
 <span class="close" onclick="closePopup('iletisim')">✖</span>
 <h2>İletişim</h2>
-<form id="iletisimForm">
-<input type="text" name="name" placeholder="Ad Soyad" required>
-<input type="email" name="email" placeholder="Email" required>
-<textarea name="message" placeholder="Mesajınız" required></textarea>
+
+<form>
+<input type="text" placeholder="Ad Soyad" required>
+<input type="email" placeholder="Email" required>
+<textarea placeholder="Mesajınız" required></textarea>
 <button type="submit" class="bakir-btn">Gönder</button>
-<div class="success" id="iletisimSuccess">Mesaj gönderildi.</div>
 </form>
+
 </div>
 </div>
 
@@ -152,20 +170,21 @@ display:none;
 <div id="teklif" class="popup">
 <div class="popup-content">
 <h2>Teklif Al</h2>
+
 <form id="teklifForm">
-<input type="text" name="name" placeholder="Ad Soyad" required>
-<input type="email" name="email" placeholder="Email" required>
-<textarea name="message" placeholder="Proje Detayı" required></textarea>
+<input type="text" placeholder="Ad Soyad" required>
+<input type="email" placeholder="Email" required>
+<textarea placeholder="Proje Detayı" required></textarea>
 <button type="submit" class="bakir-btn">Gönder</button>
-<div class="success" id="teklifSuccess">Size en kısa sürede geri dönüş sağlayacağız.</div>
+<div class="success" id="teklifSuccess">
+Size en kısa sürede geri dönüş sağlayacağız.
+</div>
 </form>
+
 </div>
 </div>
 
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
-emailjs.init("YOUR_PUBLIC_KEY"); // EmailJS public key
-
 function openPopup(id){
 document.getElementById(id).style.display="flex";
 }
@@ -174,30 +193,28 @@ function closePopup(id){
 document.getElementById(id).style.display="none";
 }
 
-function outsideClose(event,id){
+function closeOutside(event,id){
 if(event.target.id===id){
 closePopup(id);
 }
 }
 
-// FORM MAIL GÖNDERME
-function sendMail(formId, successId, popupId){
-document.getElementById(formId).addEventListener("submit", function(e){
+/* İLETİŞİM POPUP DIŞ TIKLAMA KAPANMAZ */
+document.getElementById("iletisim").addEventListener("click",function(e){
+e.stopPropagation();
+});
+
+/* TEKLİF FORM */
+document.getElementById("teklifForm").addEventListener("submit",function(e){
 e.preventDefault();
 
-emailjs.sendForm("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",this)
-.then(()=>{
-document.getElementById(successId).style.display="block";
+let msg=document.getElementById("teklifSuccess");
+msg.style.display="block";
+
 setTimeout(()=>{
-document.getElementById(successId).style.display="none";
-closePopup(popupId);
+window.location.href="/";
 },5000);
 });
-});
-}
-
-sendMail("iletisimForm","iletisimSuccess","iletisim");
-sendMail("teklifForm","teklifSuccess","teklif");
 </script>
 
 </body>
